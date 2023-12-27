@@ -38,8 +38,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: rodando banco de dados
-      run: ls
-            cd /database-doker
+      run: ls &&
+            cd database-doker/
 
     
 
