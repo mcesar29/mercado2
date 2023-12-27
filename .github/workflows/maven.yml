@@ -21,15 +21,10 @@ jobs:
     
     steps:
     - uses: actions/checkout@v3
-
-    - name: Mudando o caminho
-      run:  cd database-doker/ && ls && docker-compose up -d
-
-    - name: Subindo o banco de dados
-      run: docker-compose up -d
-    
-    - name: Criando imagem da API 
-      run: docker buildx build . -t api-img-mercado
-
-    - name: subindo aplicação
-      run: docker run -d -e IPADRESS=jdbc:postgresql://localhost:5432/mercado --net=database-doker_postgres-compose-network -p=5432:5432 -p=8080:8080 -P --name api-cont-mercado api-img-mercado
+    - name: rodando banco de dados
+      run:  ls &&
+            cd database-doker/ &&
+            docker-compose up -d &&
+            cd .. &&
+            docker buildx build . -t api-img-mercado &&
+            docker run -d -e IPADRESS=jdbc:postgresql://localhost:5432/mercado --net=database-doker_postgres-compose-network -p=5432:5432 -p=8080:8080 -P --name api-cont-mercado api-img-mercado
