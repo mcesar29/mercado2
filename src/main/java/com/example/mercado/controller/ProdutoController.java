@@ -50,8 +50,8 @@ public class ProdutoController {
     public ResponseEntity<List<ProdutoModel>> listarProdutos() {
         return new ResponseEntity<>(produtoRepository.findAll(),HttpStatus.OK);
     }
-
-    @GetMapping("{id}")
+    
+    @GetMapping("/{id}")
     // @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Optional<ProdutoModel>> getProduto(@PathVariable Long id) {
         return new ResponseEntity<>(produtoRepository.findById(id),HttpStatus.OK);
