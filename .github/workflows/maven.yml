@@ -46,7 +46,7 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     - name: set env
-      run: echo "POSTGRES_HOST=localhost" >> $GITHUB_ENV
+      run: echo "POSTGRES_HOST=postgres" >> $GITHUB_ENV
       # env:
       #   # The hostname used to communicate with the PostgreSQL service container
       #   POSTGRES_HOST: jdbc:postgresql://localhost:5432/mercado
