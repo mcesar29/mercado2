@@ -11,7 +11,7 @@ RUN mvn dependency:go-offline
 
 # Copia o resto do código e realiza o build
 COPY src src
-RUN mvn package -DskipTests
+RUN mvn package 
 
 # Estágio 2: Criação da imagem final com o JAR construído
 FROM openjdk:17-jdk-alpine
