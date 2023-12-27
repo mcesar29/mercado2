@@ -42,7 +42,7 @@ jobs:
             cd database-doker/ &&
             docker-compose up -d &&
             cd .. &&
-            docker buildx build . -t api-img-mercado
+            docker buildx build . -t api-img-mercado &&
             docker run -d -e IPADRESS=jdbc:postgresql://localhost:5432/mercado --net=database-doker_postgres-compose-network -p=5432:5432 -p=8080:8080 -P --name api-cont-mercado api-img-mercado
 
     # - name: Set up JDK 17
