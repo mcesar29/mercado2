@@ -40,8 +40,8 @@ jobs:
     - name: rodando banco de dados
       run:  ls &&
             cd database-doker/ &&
-            docker-compose up -d --name=postgrecontainer &&
-            docker container ls
+            docker-compose up -d &&
+            docker container inspect database-doker_local-postgres-compose_1
     # - name: Set up JDK 17
     #   uses: actions/setup-java@v3
     #   with:
