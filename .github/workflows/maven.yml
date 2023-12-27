@@ -45,8 +45,10 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+        time: '30s'
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+          
 
       # env:
       #   # The hostname used to communicate with the PostgreSQL service container
