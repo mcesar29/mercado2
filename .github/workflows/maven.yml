@@ -23,7 +23,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Mudando o caminho
-      run:  cd database-doker/ && ls
+      run:  cd database-doker/ && ls && docker-compose up -d
 
     - name: Subindo o banco de dados
       run: docker-compose up -d
