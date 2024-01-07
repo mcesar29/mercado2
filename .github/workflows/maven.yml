@@ -1,0 +1,47 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Rodando Banco de Dados
+      run: cd database-doker/ && docker-compose up -d
+    
+    - name: Buildando API
+      run: docker buildx build . -t api-img-mercado 
+    
+    - name: Rodando API
+      run: docker run -d -e IPADRESS=jdbc:postgresql://localhost:5432/mercado --net=database-doker_postgres-compose-network -p=5432:5432 -p=8080:8080 -P --name api-cont-mercado api-img-mercado
+    
+    - name: Listando Containers
+      run: docker container ls
+  
+  outroteste:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: start
+      run: ls &&
+        cd database-doker/ &&
+        docker-compose up -d &&
+        cd .. &&
+        docker buildx build . -t api-img-mercado &&
+        docker run -d -e IPADRESS=jdbc:postgresql://localhost:5432/mercado --net=database-doker_postgres-compose-network -p=5432:5432 -p=8080:8080 -P --name api-cont-mercado api-img-mercado
